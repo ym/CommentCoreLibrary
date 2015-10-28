@@ -73,7 +73,9 @@ module.exports = (grunt) ->
 
   # Core concatenated with libraries
   # Actual concat ordering does not/should not matter
-  SRC_CORELIB = SRC_CORE.concat(SRC_PARSER)
+  SRC_CORELIB = SRC_CORE.concat(SRC_PARSER).concat([
+      'src/Exports.js'
+  ])
 
   grunt.loadNpmTasks('grunt-contrib-coffee')
   grunt.loadNpmTasks('grunt-contrib-jasmine')
@@ -212,4 +214,3 @@ module.exports = (grunt) ->
   grunt.registerTask 'build', ['compile-ts-core', 'concat:all', 'autoprefixer', 'cssmin', 'uglify:all']
   grunt.registerTask 'ci', ['build', 'coffee', 'jasmine:ci']
   grunt.registerTask 'default', ['clean', 'build', 'build-scripting', 'watch']
-
